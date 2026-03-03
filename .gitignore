@@ -25,3 +25,6 @@ Thumbs.db
 
 # Streamlit local cache
 .streamlit/credentials.toml
+
+# Claude Code local settings
+.claude/

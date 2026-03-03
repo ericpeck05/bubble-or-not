@@ -566,9 +566,8 @@ with tab_comps:
             st.markdown("#### Trading Multiples")
             display = comps_df[["ev_ebitda", "pe_ratio", "ps_ratio", "peg_ratio"]].copy()
             display.columns = ["EV/EBITDA", "P/E", "P/S", "PEG"]
-            display = display.map(
-                lambda x: f"{x:.1f}×" if pd.notna(x) and isinstance(x, (int, float)) and x > 0 else "—"
-            )
+            fmt = lambda x: f"{x:.1f}×" if pd.notna(x) and isinstance(x, (int, float)) and x > 0 else "—"
+            display = display.apply(lambda col: col.map(fmt))
             st.dataframe(display, use_container_width=True)
 
         with col_imp:
