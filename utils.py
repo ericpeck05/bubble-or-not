@@ -10,12 +10,41 @@ warnings.filterwarnings("ignore")
 
 import numpy as np
 import pandas as pd
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 import yfinance as yf
 
 from config import (
     RISK_FREE_RATE, EQUITY_RISK_PREMIUM,
     DEFAULT_BETA, DEFAULT_DEBT_COST, DEFAULT_TAX_RATE,
 )
+
+# ── Shared requests session ───────────────────────────────────────────────────
+# Yahoo Finance blocks cloud-server IPs that use the default Python User-Agent.
+# A browser-like UA + retry logic fixes this on Streamlit Cloud / AWS / GCP.
+def _make_session() -> requests.Session:
+    session = requests.Session()
+    retries = Retry(total=3, backoff_factor=0.5,
+                    status_forcelist=[429, 500, 502, 503, 504])
+    session.mount("https://", HTTPAdapter(max_retries=retries))
+    session.headers.update({
+        "User-Agent": (
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+            "AppleWebKit/537.36 (KHTML, like Gecko) "
+            "Chrome/120.0.0.0 Safari/537.36"
+        ),
+        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        "Accept-Language": "en-US,en;q=0.5",
+    })
+    return session
+
+_SESSION = _make_session()
+
+
+def get_ticker(symbol: str) -> yf.Ticker:
+    """Return a yf.Ticker using the shared browser-spoofed session."""
+    return yf.Ticker(symbol, session=_SESSION)
 
 
 # ─── Financial Data ───────────────────────────────────────────────────────────
@@ -29,7 +58,7 @@ def fetch_financials(ticker: str) -> dict:
         shares_outstanding, beta, revenue_growth, fcf_margin
     Missing fields are None; warnings are printed to stdout.
     """
-    stock = yf.Ticker(ticker)
+    stock = get_ticker(ticker)
 
     result: dict = {
         "ticker":              ticker,
@@ -164,7 +193,7 @@ def build_wacc(ticker: str, manual_wacc: float = None) -> dict:
         }
 
     try:
-        stock  = yf.Ticker(ticker)
+        stock  = get_ticker(ticker)
         info   = stock.info
 
         beta        = info.get("beta") or DEFAULT_BETA
@@ -235,7 +264,7 @@ def get_market_data(ticker: str) -> dict:
     EV = Market Cap + Total Debt − Cash & Equivalents.
     """
     try:
-        info       = yf.Ticker(ticker).info
+        info       = get_ticker(ticker).info
         price      = info.get("currentPrice") or info.get("regularMarketPrice")
         market_cap = info.get("marketCap")
         total_debt = info.get("totalDebt", 0) or 0

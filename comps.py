@@ -19,7 +19,7 @@ import pandas as pd
 import yfinance as yf
 
 from config import DEFAULT_PEER_GROUP
-from utils import safe_divide
+from utils import safe_divide, get_ticker
 
 
 # ─── Single-Ticker Metrics ────────────────────────────────────────────────────
@@ -36,7 +36,7 @@ def fetch_comp_metrics(ticker: str) -> dict:
         "revenue_growth": None,
     }
     try:
-        info = yf.Ticker(ticker).info
+        info = get_ticker(ticker).info
 
         price      = info.get("currentPrice") or info.get("regularMarketPrice")
         market_cap = info.get("marketCap")
@@ -168,8 +168,8 @@ def run_comps(
 
         # — P/E implied price —
         try:
-            eps = yf.Ticker(target_ticker).info.get("trailingEps") or \
-                  yf.Ticker(target_ticker).info.get("epsTrailingTwelveMonths")
+            eps = get_ticker(target_ticker).info.get("trailingEps") or \
+                  get_ticker(target_ticker).info.get("epsTrailingTwelveMonths")
             if (eps and eps > 0 and medians["pe_ratio"]
                     and not np.isnan(medians["pe_ratio"])):
                 implied_prices["pe_ratio"] = medians["pe_ratio"] * eps
