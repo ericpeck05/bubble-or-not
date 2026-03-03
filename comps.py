@@ -19,7 +19,7 @@ import pandas as pd
 import yfinance as yf
 
 from config import DEFAULT_PEER_GROUP
-from utils import safe_divide, get_ticker
+from utils import safe_divide, get_ticker, _CACHE
 
 
 # ─── Single-Ticker Metrics ────────────────────────────────────────────────────
@@ -37,6 +37,9 @@ def fetch_comp_metrics(ticker: str) -> dict:
     }
     try:
         info = get_ticker(ticker).info
+        # If Yahoo blocked the request, info will be empty — fall through to cache
+        if not info.get("regularMarketPrice") and not info.get("currentPrice"):
+            raise ValueError("Blocked")
 
         price      = info.get("currentPrice") or info.get("regularMarketPrice")
         market_cap = info.get("marketCap")
@@ -86,7 +89,10 @@ def fetch_comp_metrics(ticker: str) -> dict:
         }
 
     except Exception as exc:
-        print(f"  [Warning] Could not fetch comps for {ticker}: {exc}")
+        print(f"  [Info] Live comps fetch failed for {ticker} ({exc}). Using cache.")
+        cached = _CACHE.get(ticker.upper(), {}).get("comp_metrics")
+        if cached:
+            return cached
         return blank
 
 

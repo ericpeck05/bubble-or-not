@@ -1,0 +1,446 @@
+{
+  "NVDA": {
+    "financials": {
+      "ticker": "NVDA",
+      "revenue": 215938007040,
+      "ebit": 141709000000.0,
+      "ebitda": 133230002176,
+      "net_income": 120066998272,
+      "fcf": 96676000000.0,
+      "total_debt": 11411999744,
+      "cash": 62556000256,
+      "shares_outstanding": 24300000000,
+      "beta": 2.375,
+      "revenue_growth": 0.732,
+      "fcf_margin": 0.4477025667005063
+    },
+    "market_data": {
+      "ticker": "NVDA",
+      "price": 180.05,
+      "market_cap": 4376115281920,
+      "ev": 4324971281408,
+      "total_debt": 11411999744,
+      "cash": 62556000256
+    },
+    "comp_metrics": {
+      "ticker": "NVDA",
+      "price": 180.05,
+      "market_cap": 4376115281920,
+      "ev": 4324971281408,
+      "ebitda": 133230002176,
+      "revenue": 215938007040,
+      "ev_ebitda": 32.899,
+      "pe_ratio": 36.670063,
+      "ps_ratio": 20.26561,
+      "peg_ratio": 0.5009571448087431,
+      "revenue_growth": 0.732
+    }
+  },
+  "MSFT": {
+    "financials": {
+      "ticker": "MSFT",
+      "revenue": 305453006848,
+      "ebit": 126012000000.0,
+      "ebitda": 175258992640,
+      "net_income": 119262003200,
+      "fcf": 71611000000.0,
+      "total_debt": 123278000128,
+      "cash": 89461997568,
+      "shares_outstanding": 7425629076,
+      "beta": 1.108,
+      "revenue_growth": 0.167,
+      "fcf_margin": 0.2344419547182103
+    },
+    "market_data": {
+      "ticker": "MSFT",
+      "price": 403.93,
+      "market_cap": 3002160381952,
+      "ev": 3035976384512,
+      "total_debt": 123278000128,
+      "cash": 89461997568
+    },
+    "comp_metrics": {
+      "ticker": "MSFT",
+      "price": 403.93,
+      "market_cap": 3002160381952,
+      "ev": 3035976384512,
+      "ebitda": 175258992640,
+      "revenue": 305453006848,
+      "ev_ebitda": 17.079,
+      "pe_ratio": 25.277222,
+      "ps_ratio": 9.82855,
+      "peg_ratio": 1.5136061077844312,
+      "revenue_growth": 0.167
+    }
+  },
+  "GOOGL": {
+    "financials": {
+      "ticker": "GOOGL",
+      "revenue": 402835996672,
+      "ebit": 159562000000.0,
+      "ebitda": 150175006720,
+      "net_income": 132169998336,
+      "fcf": 73266000000.0,
+      "total_debt": 66995998720,
+      "cash": 126843002880,
+      "shares_outstanding": 5822000000,
+      "beta": 1.112,
+      "revenue_growth": 0.18,
+      "fcf_margin": 0.18187550418850768
+    },
+    "market_data": {
+      "ticker": "GOOGL",
+      "price": 303.58,
+      "market_cap": 3672407277568,
+      "ev": 3612560273408,
+      "total_debt": 66995998720,
+      "cash": 126843002880
+    },
+    "comp_metrics": {
+      "ticker": "GOOGL",
+      "price": 303.58,
+      "market_cap": 3672407277568,
+      "ev": 3612560273408,
+      "ebitda": 150175006720,
+      "revenue": 402835996672,
+      "ev_ebitda": 24.292,
+      "pe_ratio": 28.0573,
+      "ps_ratio": 9.116384,
+      "peg_ratio": 1.558738888888889,
+      "revenue_growth": 0.18
+    }
+  },
+  "META": {
+    "financials": {
+      "ticker": "META",
+      "revenue": 200965996544,
+      "ebit": 87097000000.0,
+      "ebitda": 101891997696,
+      "net_income": 60458000384,
+      "fcf": 46109000000.0,
+      "total_debt": 85080997888,
+      "cash": 81592000512,
+      "shares_outstanding": 2187177748,
+      "beta": 1.279,
+      "revenue_growth": 0.238,
+      "fcf_margin": 0.22943682410424482
+    },
+    "market_data": {
+      "ticker": "META",
+      "price": 655.08,
+      "market_cap": 1657061244928,
+      "ev": 1660550242304,
+      "total_debt": 85080997888,
+      "cash": 81592000512
+    },
+    "comp_metrics": {
+      "ticker": "META",
+      "price": 655.08,
+      "market_cap": 1657061244928,
+      "ev": 1660550242304,
+      "ebitda": 101891997696,
+      "revenue": 200965996544,
+      "ev_ebitda": 16.259,
+      "pe_ratio": 27.923275,
+      "ps_ratio": 8.245481,
+      "peg_ratio": 1.173246848739496,
+      "revenue_growth": 0.238
+    }
+  },
+  "AMD": {
+    "financials": {
+      "ticker": "AMD",
+      "revenue": 34638999552,
+      "ebit": 4271000000.0,
+      "ebitda": 6744999936,
+      "net_income": 4268999936,
+      "fcf": 6735000000.0,
+      "total_debt": 4006000128,
+      "cash": 10552000512,
+      "shares_outstanding": 1630410843,
+      "beta": 2.022,
+      "revenue_growth": 0.341,
+      "fcf_margin": 0.1944340219725293
+    },
+    "market_data": {
+      "ticker": "AMD",
+      "price": 190.95,
+      "market_cap": 311326965760,
+      "ev": 304780965376,
+      "total_debt": 4006000128,
+      "cash": 10552000512
+    },
+    "comp_metrics": {
+      "ticker": "AMD",
+      "price": 190.95,
+      "market_cap": 311326965760,
+      "ev": 304780965376,
+      "ebitda": 6744999936,
+      "revenue": 34638999552,
+      "ev_ebitda": 47.04,
+      "pe_ratio": 73.44231,
+      "ps_ratio": 8.987759,
+      "peg_ratio": 2.153733431085044,
+      "revenue_growth": 0.341
+    }
+  },
+  "AMZN": {
+    "financials": {
+      "ticker": "AMZN",
+      "revenue": 716923994112,
+      "ebit": 99585000000.0,
+      "ebitda": 145730994176,
+      "net_income": 77669998592,
+      "fcf": 7695000000.0,
+      "total_debt": 178546999296,
+      "cash": 123028996096,
+      "shares_outstanding": 10734920870,
+      "beta": 1.42,
+      "revenue_growth": 0.136,
+      "fcf_margin": 0.010733355367093298
+    },
+    "market_data": {
+      "ticker": "AMZN",
+      "price": 208.73,
+      "market_cap": 2240699957248,
+      "ev": 2296217960448,
+      "total_debt": 178546999296,
+      "cash": 123028996096
+    },
+    "comp_metrics": {
+      "ticker": "AMZN",
+      "price": 208.73,
+      "market_cap": 2240699957248,
+      "ev": 2296217960448,
+      "ebitda": 145730994176,
+      "revenue": 716923994112,
+      "ev_ebitda": 15.732,
+      "pe_ratio": 29.111574,
+      "ps_ratio": 3.1254358,
+      "peg_ratio": 2.1405569117647056,
+      "revenue_growth": 0.136
+    }
+  },
+  "CRM": {
+    "financials": {
+      "ticker": "CRM",
+      "revenue": 41524998144,
+      "ebit": 7666000000.0,
+      "ebitda": 12547999744,
+      "net_income": 7456999936,
+      "fcf": 12434000000.0,
+      "total_debt": 17176000512,
+      "cash": 9564999680,
+      "shares_outstanding": 937000000,
+      "beta": 1.307,
+      "revenue_growth": 0.121,
+      "fcf_margin": 0.29943408924141285
+    },
+    "market_data": {
+      "ticker": "CRM",
+      "price": 196.05,
+      "market_cap": 186639597568,
+      "ev": 194250598400,
+      "total_debt": 17176000512,
+      "cash": 9564999680
+    },
+    "comp_metrics": {
+      "ticker": "CRM",
+      "price": 196.05,
+      "market_cap": 186639597568,
+      "ev": 194250598400,
+      "ebitda": 12547999744,
+      "revenue": 41524998144,
+      "ev_ebitda": 14.984,
+      "pe_ratio": 26.174902,
+      "ps_ratio": 4.4946322,
+      "peg_ratio": 2.163215041322314,
+      "revenue_growth": 0.121
+    }
+  },
+  "TSLA": {
+    "financials": {
+      "ticker": "TSLA",
+      "revenue": 94827003904,
+      "ebit": 5616000000.0,
+      "ebitda": 10503000064,
+      "net_income": 3793999872,
+      "fcf": 6220000000.0,
+      "total_debt": 14718999552,
+      "cash": 44059000832,
+      "shares_outstanding": 3752431984,
+      "beta": 1.926,
+      "revenue_growth": -0.031,
+      "fcf_margin": 0.06559313005709788
+    },
+    "market_data": {
+      "ticker": "TSLA",
+      "price": 392.43,
+      "market_cap": 1472566788096,
+      "ev": 1443226786816,
+      "total_debt": 14718999552,
+      "cash": 44059000832
+    },
+    "comp_metrics": {
+      "ticker": "TSLA",
+      "price": 392.43,
+      "market_cap": 1472566788096,
+      "ev": 1443226786816,
+      "ebitda": 10503000064,
+      "revenue": 94827003904,
+      "ev_ebitda": 141.371,
+      "pe_ratio": 360.0275,
+      "ps_ratio": 15.528981,
+      "peg_ratio": null,
+      "revenue_growth": -0.031
+    }
+  },
+  "AAPL": {
+    "financials": {
+      "ticker": "AAPL",
+      "revenue": 435617005568,
+      "ebit": 133050000000.0,
+      "ebitda": 152901992448,
+      "net_income": 117776998400,
+      "fcf": 98767000000.0,
+      "total_debt": 90509000704,
+      "cash": 66907000832,
+      "shares_outstanding": 14681140000,
+      "beta": 1.116,
+      "revenue_growth": 0.157,
+      "fcf_margin": 0.22672898150800597
+    },
+    "market_data": {
+      "ticker": "AAPL",
+      "price": 263.75,
+      "market_cap": 3876577869824,
+      "ev": 3900179869696,
+      "total_debt": 90509000704,
+      "cash": 66907000832
+    },
+    "comp_metrics": {
+      "ticker": "AAPL",
+      "price": 263.75,
+      "market_cap": 3876577869824,
+      "ev": 3900179869696,
+      "ebitda": 152901992448,
+      "revenue": 435617005568,
+      "ev_ebitda": 25.572,
+      "pe_ratio": 33.42839,
+      "ps_ratio": 8.899051,
+      "peg_ratio": 2.1291968152866243,
+      "revenue_growth": 0.157
+    }
+  },
+  "INTC": {
+    "financials": {
+      "ticker": "INTC",
+      "revenue": 52852998144,
+      "ebit": 2648000000.0,
+      "ebitda": 12632999936,
+      "net_income": -267000000,
+      "fcf": -4949000000.0,
+      "total_debt": 47109001216,
+      "cash": 37416001536,
+      "shares_outstanding": 4995000000,
+      "beta": 1.375,
+      "revenue_growth": -0.041,
+      "fcf_margin": -0.09363707213952673
+    },
+    "market_data": {
+      "ticker": "INTC",
+      "price": 43.1,
+      "market_cap": 215292182528,
+      "ev": 224985182208,
+      "total_debt": 47109001216,
+      "cash": 37416001536
+    },
+    "comp_metrics": {
+      "ticker": "INTC",
+      "price": 43.1,
+      "market_cap": 215292182528,
+      "ev": 224985182208,
+      "ebitda": 12632999936,
+      "revenue": 52852998144,
+      "ev_ebitda": 19.714,
+      "pe_ratio": 43.483524,
+      "ps_ratio": 4.073415,
+      "peg_ratio": null,
+      "revenue_growth": -0.041
+    }
+  },
+  "QCOM": {
+    "financials": {
+      "ticker": "QCOM",
+      "revenue": 44866998272,
+      "ebit": 13327000000.0,
+      "ebitda": 13763999744,
+      "net_income": 5365000192,
+      "fcf": 12820000000.0,
+      "total_debt": 14817000448,
+      "cash": 11822000128,
+      "shares_outstanding": 1067000000,
+      "beta": 1.267,
+      "revenue_growth": 0.05,
+      "fcf_margin": 0.28573340080119725
+    },
+    "market_data": {
+      "ticker": "QCOM",
+      "price": 138.13,
+      "market_cap": 147529072640,
+      "ev": 150524072960,
+      "total_debt": 14817000448,
+      "cash": 11822000128
+    },
+    "comp_metrics": {
+      "ticker": "QCOM",
+      "price": 138.13,
+      "market_cap": 147529072640,
+      "ev": 150524072960,
+      "ebitda": 13763999744,
+      "revenue": 44866998272,
+      "ev_ebitda": 11.15,
+      "pe_ratio": 27.848791,
+      "ps_ratio": 3.2881422,
+      "peg_ratio": 5.5697582,
+      "revenue_growth": 0.05
+    }
+  },
+  "ARM": {
+    "financials": {
+      "ticker": "ARM",
+      "revenue": 4671000064,
+      "ebit": 831000000.0,
+      "ebitda": 1083800064,
+      "net_income": 801000000,
+      "fcf": 158000000.0,
+      "total_debt": 461000000,
+      "cash": 3542000128,
+      "shares_outstanding": 1061998569,
+      "beta": 4.132,
+      "revenue_growth": 0.263,
+      "fcf_margin": 0.03382573278423316
+    },
+    "market_data": {
+      "ticker": "ARM",
+      "price": 121.72,
+      "market_cap": 129266466816,
+      "ev": 126185466688,
+      "total_debt": 461000000,
+      "cash": 3542000128
+    },
+    "comp_metrics": {
+      "ticker": "ARM",
+      "price": 121.72,
+      "market_cap": 129266466816,
+      "ev": 126185466688,
+      "ebitda": 1083800064,
+      "revenue": 4671000064,
+      "ev_ebitda": 119.026,
+      "pe_ratio": 162.29333,
+      "ps_ratio": 27.67426,
+      "peg_ratio": 6.170849049429657,
+      "revenue_growth": 0.263
+    }
+  }
+}

@@ -290,8 +290,10 @@ if run_btn:
 
         if not market_data.get("price"):
             status.update(label="Failed", state="error")
-            st.error(f"Could not retrieve price data for **{ticker_input}**. "
-                     "Check the ticker symbol and try again.")
+            st.error(
+                f"No data available for **{ticker_input}** — not in cache and live fetch failed. "
+                f"Try one of the default tickers: NVDA, MSFT, GOOGL, META, AMD, AMZN, CRM."
+            )
             st.stop()
 
         st.write("⚙️ Building WACC …")
@@ -357,6 +359,13 @@ current_price = market_data.get("price", 0)
 dcf_iv        = dcf.get("intrinsic_value_per_share") if "error" not in dcf else None
 dcf_upside    = dcf.get("upside_pct")
 verdict       = dcf.get("verdict", "N/A")
+
+# Show a banner if either dataset came from the local cache
+if market_data.get("_from_cache") or financials.get("_from_cache"):
+    st.warning(
+        "⚡ **Using cached data** — Yahoo Finance is rate-limiting requests from this server. "
+        "Prices reflect the last local snapshot. Run locally for live quotes."
+    )
 
 
 # ── Header ─────────────────────────────────────────────────────────────────────
