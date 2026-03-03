@@ -10,9 +10,6 @@ warnings.filterwarnings("ignore")
 
 import numpy as np
 import pandas as pd
-import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
 import yfinance as yf
 
 from config import (
@@ -20,30 +17,32 @@ from config import (
     DEFAULT_BETA, DEFAULT_DEBT_COST, DEFAULT_TAX_RATE,
 )
 
-# ── Shared requests session ───────────────────────────────────────────────────
-# Yahoo Finance blocks cloud-server IPs that use the default Python User-Agent.
-# A browser-like UA + retry logic fixes this on Streamlit Cloud / AWS / GCP.
-def _make_session() -> requests.Session:
-    session = requests.Session()
-    retries = Retry(total=3, backoff_factor=0.5,
-                    status_forcelist=[429, 500, 502, 503, 504])
-    session.mount("https://", HTTPAdapter(max_retries=retries))
-    session.headers.update({
-        "User-Agent": (
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-            "AppleWebKit/537.36 (KHTML, like Gecko) "
-            "Chrome/120.0.0.0 Safari/537.36"
-        ),
-        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-        "Accept-Language": "en-US,en;q=0.5",
-    })
-    return session
-
-_SESSION = _make_session()
+# ── Session setup ─────────────────────────────────────────────────────────────
+# Yahoo Finance blocks cloud IPs via TLS fingerprint inspection — a plain
+# requests session with a fake User-Agent is not enough. curl_cffi impersonates
+# Chrome at the TLS/HTTP2 layer, which is the standard fix for 2024-25.
+try:
+    from curl_cffi import requests as curl_requests
+    _SESSION = curl_requests.Session(impersonate="chrome")
+    _CURL = True
+except ImportError:
+    # Local fallback: regular requests (works fine on a home/office connection)
+    import requests
+    from requests.adapters import HTTPAdapter
+    from urllib3.util.retry import Retry
+    _s = requests.Session()
+    _r = Retry(total=3, backoff_factor=0.5, status_forcelist=[429, 500, 502, 503, 504])
+    _s.mount("https://", HTTPAdapter(max_retries=_r))
+    _s.headers["User-Agent"] = (
+        "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
+        "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    )
+    _SESSION = _s
+    _CURL = False
 
 
 def get_ticker(symbol: str) -> yf.Ticker:
-    """Return a yf.Ticker using the shared browser-spoofed session."""
+    """Return a yf.Ticker wired to the cloud-safe session."""
     return yf.Ticker(symbol, session=_SESSION)
 
 
