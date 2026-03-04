@@ -849,5 +849,449 @@
       "peg_ratio": null,
       "revenue_growth": -0.038
     }
+  },
+  "COP": {
+    "financials": {
+      "ticker": "COP",
+      "revenue": 60279001088,
+      "ebit": 13889000000.0,
+      "ebitda": 24160999424,
+      "net_income": 7960999936,
+      "fcf": 7243000000.0,
+      "total_debt": 24394000384,
+      "cash": 6981000192,
+      "shares_outstanding": 1222339152,
+      "beta": 0.279,
+      "revenue_growth": -0.068,
+      "fcf_margin": 0.12015793011277845
+    },
+    "market_data": {
+      "ticker": "COP",
+      "price": 118.52,
+      "market_cap": 144871636992,
+      "ev": 162284637184,
+      "total_debt": 24394000384,
+      "cash": 6981000192
+    },
+    "comp_metrics": {
+      "ticker": "COP",
+      "price": 118.52,
+      "market_cap": 144871636992,
+      "ev": 162284637184,
+      "ebitda": 24160999424,
+      "revenue": 60279001088,
+      "ev_ebitda": 6.717,
+      "pe_ratio": 18.63522,
+      "ps_ratio": 2.40335,
+      "peg_ratio": null,
+      "revenue_growth": -0.068
+    }
+  },
+  "SLB": {
+    "financials": {
+      "ticker": "SLB",
+      "revenue": 35707998208,
+      "ebit": 4849000000.0,
+      "ebitda": 7733000192,
+      "net_income": 3374000128,
+      "fcf": 4543000000.0,
+      "total_debt": 12547000320,
+      "cash": 4304999936,
+      "shares_outstanding": 1495331485,
+      "beta": 0.709,
+      "revenue_growth": 0.05,
+      "fcf_margin": 0.1272263982298002
+    },
+    "market_data": {
+      "ticker": "SLB",
+      "price": 48.58,
+      "market_cap": 72643207168,
+      "ev": 80885207552,
+      "total_debt": 12547000320,
+      "cash": 4304999936
+    },
+    "comp_metrics": {
+      "ticker": "SLB",
+      "price": 48.58,
+      "market_cap": 72643207168,
+      "ev": 80885207552,
+      "ebitda": 7733000192,
+      "revenue": 35707998208,
+      "ev_ebitda": 10.613,
+      "pe_ratio": 21.882883,
+      "ps_ratio": 2.03437,
+      "peg_ratio": null,
+      "revenue_growth": 0.05
+    }
+  },
+  "EOG": {
+    "financials": {
+      "ticker": "EOG",
+      "revenue": 22653999104,
+      "ebit": 6597000000.0,
+      "ebitda": 11724000256,
+      "net_income": 4979999744,
+      "fcf": 3450000000.0,
+      "total_debt": 9134999552,
+      "cash": 3396000000,
+      "shares_outstanding": 536491493,
+      "beta": 0.427,
+      "revenue_growth": 0.0,
+      "fcf_margin": 0.15229099216265246
+    },
+    "market_data": {
+      "ticker": "EOG",
+      "price": 128.01,
+      "market_cap": 69458026496,
+      "ev": 75197026048,
+      "total_debt": 9134999552,
+      "cash": 3396000000
+    },
+    "comp_metrics": {
+      "ticker": "EOG",
+      "price": 128.01,
+      "market_cap": 69458026496,
+      "ev": 75197026048,
+      "ebitda": 11724000256,
+      "revenue": 22653999104,
+      "ev_ebitda": 6.347,
+      "pe_ratio": 14.098017,
+      "ps_ratio": 3.06604,
+      "peg_ratio": null,
+      "revenue_growth": 0.0
+    }
+  },
+  "WFC": {
+    "financials": {
+      "ticker": "WFC",
+      "revenue": 80041000960,
+      "ebit": null,
+      "ebitda": null,
+      "net_income": 20284999680,
+      "fcf": -19001000000.0,
+      "total_debt": 443507998720,
+      "cash": 449211006976,
+      "shares_outstanding": 3085635641,
+      "beta": 1.071,
+      "revenue_growth": 0.05,
+      "fcf_margin": -0.23739083434870628
+    },
+    "market_data": {
+      "ticker": "WFC",
+      "price": 82.53,
+      "market_cap": 259068641280,
+      "ev": 253365633024,
+      "total_debt": 443507998720,
+      "cash": 449211006976
+    },
+    "comp_metrics": {
+      "ticker": "WFC",
+      "price": 82.53,
+      "market_cap": 259068641280,
+      "ev": 253365633024,
+      "ebitda": null,
+      "revenue": 80041000960,
+      "ev_ebitda": null,
+      "pe_ratio": 13.183705,
+      "ps_ratio": 3.2367,
+      "peg_ratio": null,
+      "revenue_growth": 0.05
+    }
+  },
+  "C": {
+    "financials": {
+      "ticker": "C",
+      "revenue": 75716001792,
+      "ebit": null,
+      "ebitda": null,
+      "net_income": 13024000000,
+      "fcf": -74152000000.0,
+      "total_debt": 777180020736,
+      "cash": 989678993408,
+      "shares_outstanding": 1749319009,
+      "beta": 1.131,
+      "revenue_growth": 0.044,
+      "fcf_margin": -0.9793438407340038
+    },
+    "market_data": {
+      "ticker": "C",
+      "price": 110.76,
+      "market_cap": 193754578944,
+      "ev": -18744393728,
+      "total_debt": 777180020736,
+      "cash": 989678993408
+    },
+    "comp_metrics": {
+      "ticker": "C",
+      "price": 110.76,
+      "market_cap": 193754578944,
+      "ev": -18744393728,
+      "ebitda": null,
+      "revenue": 75716001792,
+      "ev_ebitda": null,
+      "pe_ratio": 15.959655,
+      "ps_ratio": 2.55896,
+      "peg_ratio": null,
+      "revenue_growth": 0.044
+    }
+  },
+  "MS": {
+    "financials": {
+      "ticker": "MS",
+      "revenue": 70296002560,
+      "ebit": null,
+      "ebitda": null,
+      "net_income": 16248999936,
+      "fcf": -20787000000.0,
+      "total_debt": 513408008192,
+      "cash": 600391024640,
+      "shares_outstanding": 1587860206,
+      "beta": 1.207,
+      "revenue_growth": 0.11,
+      "fcf_margin": -0.2957067150761183
+    },
+    "market_data": {
+      "ticker": "MS",
+      "price": 165.95,
+      "market_cap": 263505395712,
+      "ev": 176522379264,
+      "total_debt": 513408008192,
+      "cash": 600391024640
+    },
+    "comp_metrics": {
+      "ticker": "MS",
+      "price": 165.95,
+      "market_cap": 263505395712,
+      "ev": 176522379264,
+      "ebitda": null,
+      "revenue": 70296002560,
+      "ev_ebitda": null,
+      "pe_ratio": 16.365877,
+      "ps_ratio": 3.74851,
+      "peg_ratio": null,
+      "revenue_growth": 0.11
+    }
+  },
+  "BLK": {
+    "financials": {
+      "ticker": "BLK",
+      "revenue": 24216000512,
+      "ebit": 8833000000.0,
+      "ebitda": 9685999616,
+      "net_income": 5552999936,
+      "fcf": 4701000000.0,
+      "total_debt": 14995999744,
+      "cash": 14257000448,
+      "shares_outstanding": 155100000,
+      "beta": 1.487,
+      "revenue_growth": 0.234,
+      "fcf_margin": 0.19412784525134388
+    },
+    "market_data": {
+      "ticker": "BLK",
+      "price": 1052.59,
+      "market_cap": 163310288896,
+      "ev": 164049288192,
+      "total_debt": 14995999744,
+      "cash": 14257000448
+    },
+    "comp_metrics": {
+      "ticker": "BLK",
+      "price": 1052.59,
+      "market_cap": 163310288896,
+      "ev": 164049288192,
+      "ebitda": 9685999616,
+      "revenue": 24216000512,
+      "ev_ebitda": 17.563,
+      "pe_ratio": 30.21211,
+      "ps_ratio": 6.7439,
+      "peg_ratio": null,
+      "revenue_growth": 0.234
+    }
+  },
+  "ABBV": {
+    "financials": {
+      "ticker": "ABBV",
+      "revenue": 61160001536,
+      "ebit": 9490000000.0,
+      "ebitda": 29254000640,
+      "net_income": 4185999872,
+      "fcf": 17816000000.0,
+      "total_debt": 68400001024,
+      "cash": 5256999936,
+      "shares_outstanding": 1768169012,
+      "beta": 0.334,
+      "revenue_growth": 0.1,
+      "fcf_margin": 0.2913014969352665
+    },
+    "market_data": {
+      "ticker": "ABBV",
+      "price": 233.86,
+      "market_cap": 413503979520,
+      "ev": 476646980608,
+      "total_debt": 68400001024,
+      "cash": 5256999936
+    },
+    "comp_metrics": {
+      "ticker": "ABBV",
+      "price": 233.86,
+      "market_cap": 413503979520,
+      "ev": 476646980608,
+      "ebitda": 29254000640,
+      "revenue": 61160001536,
+      "ev_ebitda": 16.295,
+      "pe_ratio": 99.09322,
+      "ps_ratio": 6.76102,
+      "peg_ratio": null,
+      "revenue_growth": 0.1
+    }
+  },
+  "MRK": {
+    "financials": {
+      "ticker": "MRK",
+      "revenue": 65010999296,
+      "ebit": 22424000000.0,
+      "ebitda": 29105000448,
+      "net_income": 18254000128,
+      "fcf": 12360000000.0,
+      "total_debt": 50533998592,
+      "cash": 14565000192,
+      "shares_outstanding": 2472392003,
+      "beta": 0.264,
+      "revenue_growth": 0.05,
+      "fcf_margin": 0.19012167377590958
+    },
+    "market_data": {
+      "ticker": "MRK",
+      "price": 119.83,
+      "market_cap": 296266727424,
+      "ev": 332235725824,
+      "total_debt": 50533998592,
+      "cash": 14565000192
+    },
+    "comp_metrics": {
+      "ticker": "MRK",
+      "price": 119.83,
+      "market_cap": 296266727424,
+      "ev": 332235725824,
+      "ebitda": 29105000448,
+      "revenue": 65010999296,
+      "ev_ebitda": 11.417,
+      "pe_ratio": 16.666203,
+      "ps_ratio": 4.55718,
+      "peg_ratio": null,
+      "revenue_growth": 0.05
+    }
+  },
+  "UNH": {
+    "financials": {
+      "ticker": "UNH",
+      "revenue": 447567003648,
+      "ebit": NaN,
+      "ebitda": 21624999936,
+      "net_income": 12056000512,
+      "fcf": 20705000000.0,
+      "total_debt": 83003998208,
+      "cash": 28120999936,
+      "shares_outstanding": 905838620,
+      "beta": 0.38,
+      "revenue_growth": 0.123,
+      "fcf_margin": 0.04626122978512499
+    },
+    "market_data": {
+      "ticker": "UNH",
+      "price": 289.21,
+      "market_cap": 261977571328,
+      "ev": 316860569600,
+      "total_debt": 83003998208,
+      "cash": 28120999936
+    },
+    "comp_metrics": {
+      "ticker": "UNH",
+      "price": 289.21,
+      "market_cap": 261977571328,
+      "ev": 316860569600,
+      "ebitda": 21624999936,
+      "revenue": 447567003648,
+      "ev_ebitda": 15.028,
+      "pe_ratio": 22.26405,
+      "ps_ratio": 0.58534,
+      "peg_ratio": null,
+      "revenue_growth": 0.123
+    }
+  },
+  "TGT": {
+    "financials": {
+      "ticker": "TGT",
+      "revenue": 105242001408,
+      "ebit": 5672000000.0,
+      "ebitda": 8065999872,
+      "net_income": 3763000064,
+      "fcf": 4476000000.0,
+      "total_debt": 20470999040,
+      "cash": 3822000128,
+      "shares_outstanding": 452806418,
+      "beta": 1.105,
+      "revenue_growth": -0.016,
+      "fcf_margin": 0.04253054807127372
+    },
+    "market_data": {
+      "ticker": "TGT",
+      "price": 120.8,
+      "market_cap": 54891417600,
+      "ev": 71540416512,
+      "total_debt": 20470999040,
+      "cash": 3822000128
+    },
+    "comp_metrics": {
+      "ticker": "TGT",
+      "price": 120.8,
+      "market_cap": 54891417600,
+      "ev": 71540416512,
+      "ebitda": 8065999872,
+      "revenue": 105242001408,
+      "ev_ebitda": 8.417,
+      "pe_ratio": 13.711691,
+      "ps_ratio": 0.52157,
+      "peg_ratio": null,
+      "revenue_growth": -0.016
+    }
+  },
+  "NKE": {
+    "financials": {
+      "ticker": "NKE",
+      "revenue": 46513000448,
+      "ebit": 3702000000.0,
+      "ebitda": 3808000000,
+      "net_income": 2524000000,
+      "fcf": 3268000000.0,
+      "total_debt": 11281999872,
+      "cash": 8344999936,
+      "shares_outstanding": 1191495650,
+      "beta": 1.286,
+      "revenue_growth": 0.006,
+      "fcf_margin": 0.07025992665542005
+    },
+    "market_data": {
+      "ticker": "NKE",
+      "price": 59.39,
+      "market_cap": 87919968256,
+      "ev": 90856968192,
+      "total_debt": 11281999872,
+      "cash": 8344999936
+    },
+    "comp_metrics": {
+      "ticker": "NKE",
+      "price": 59.39,
+      "market_cap": 87919968256,
+      "ev": 90856968192,
+      "ebitda": 3808000000,
+      "revenue": 46513000448,
+      "ev_ebitda": 23.859,
+      "pe_ratio": 35.777107,
+      "ps_ratio": 1.89022,
+      "peg_ratio": null,
+      "revenue_growth": 0.006
+    }
   }
 }
