@@ -1,10 +1,9 @@
 """
 utils.py — Data fetching, WACC construction, and shared helpers.
 
-Yahoo Finance aggressively blocks cloud server IPs (Streamlit Cloud / AWS).
-Strategy: attempt a live yfinance fetch; if the price comes back empty,
-fall back to cached_data.json which was pre-fetched on a clean local connection.
-The dashboard shows a banner whenever cached data is in use.
+Uses curl_cffi to impersonate a real Chrome browser, bypassing Yahoo
+Finance's bot-detection on cloud server IPs (Streamlit Cloud / AWS).
+Falls back to cached_data.json only if the live fetch fails.
 """
 
 import json
@@ -16,6 +15,12 @@ warnings.filterwarnings("ignore")
 import numpy as np
 import pandas as pd
 import yfinance as yf
+
+try:
+    from curl_cffi import requests as _curl_requests
+    _SESSION = _curl_requests.Session(impersonate="chrome")
+except Exception:
+    _SESSION = None
 
 from config import (
     RISK_FREE_RATE, EQUITY_RISK_PREMIUM,
@@ -64,7 +69,7 @@ def fetch_financials(ticker: str) -> dict:
     }
 
     try:
-        stock = yf.Ticker(ticker)
+        stock = yf.Ticker(ticker, session=_SESSION)
         info  = stock.info or {}
 
         # Treat an empty or price-less info dict as a failed fetch
@@ -203,7 +208,7 @@ def get_market_data(ticker: str) -> dict:
         "ev": None, "total_debt": 0, "cash": 0, "_from_cache": False,
     }
     try:
-        info       = yf.Ticker(ticker).info or {}
+        info       = yf.Ticker(ticker, session=_SESSION).info or {}
         price      = info.get("currentPrice") or info.get("regularMarketPrice")
         market_cap = info.get("marketCap")
 
@@ -253,7 +258,7 @@ def safe_divide(numerator, denominator, fallback=None):
 
 def get_ticker(symbol: str) -> yf.Ticker:
     """Plain yf.Ticker — kept for backward compatibility with comps.py."""
-    return yf.Ticker(symbol)
+    return yf.Ticker(symbol, session=_SESSION)
 
 
 def get_cached_tickers() -> list:
