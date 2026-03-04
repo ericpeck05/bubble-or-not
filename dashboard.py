@@ -253,9 +253,12 @@ with st.sidebar:
 
     with st.expander("Suggestions by sector"):
         for sector, tickers_str in _SECTOR_SUGGESTIONS.items():
-            if st.button(sector, key=f"sector_{sector}", use_container_width=True):
-                st.session_state["peers_text"] = tickers_str
-                st.rerun()
+            st.button(
+                sector,
+                key=f"sector_{sector}",
+                use_container_width=True,
+                on_click=lambda v=tickers_str: st.session_state.update({"peers_text": v}),
+            )
 
     st.divider()
     st.markdown("**Override Assumptions**")
