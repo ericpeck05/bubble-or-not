@@ -240,10 +240,13 @@ with st.sidebar:
         help="Any US-listed equity.",
     ).upper().strip()
 
-    _default_peers = ", ".join([t for t in DEFAULT_PEER_GROUP if t != "NVDA"])
+    # Initialise peer text in session state on first load
+    if "peers_text" not in st.session_state:
+        st.session_state["peers_text"] = ", ".join(DEFAULT_PEER_GROUP)
+
     peers_raw = st.text_input(
         "Peer Group  (comma-separated)",
-        value=_default_peers,
+        key="peers_text",
         help="Enter any tickers separated by commas. e.g. JPM, GS, BAC or AAPL, MSFT, AMZN",
     )
     peers_input = [p.strip().upper() for p in peers_raw.split(",") if p.strip()]
@@ -251,16 +254,8 @@ with st.sidebar:
     with st.expander("Suggestions by sector"):
         for sector, tickers_str in _SECTOR_SUGGESTIONS.items():
             if st.button(sector, key=f"sector_{sector}", use_container_width=True):
-                # Strip target from suggestions if it matches
-                filtered = ", ".join(
-                    t for t in tickers_str.split(", ") if t != ticker_input
-                )
-                st.session_state["_peer_suggestion"] = filtered
+                st.session_state["peers_text"] = tickers_str
                 st.rerun()
-
-    # Apply suggestion from button click
-    if "_peer_suggestion" in st.session_state:
-        peers_input = [p.strip().upper() for p in st.session_state.pop("_peer_suggestion").split(",") if p.strip()]
 
     st.divider()
     st.markdown("**Override Assumptions**")
