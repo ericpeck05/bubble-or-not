@@ -442,5 +442,412 @@
       "peg_ratio": 6.170849049429657,
       "revenue_growth": 0.263
     }
+  },
+  "JPM": {
+    "financials": {
+      "ticker": "JPM",
+      "revenue": 168235008000,
+      "ebit": null,
+      "ebitda": null,
+      "net_income": 55680999424,
+      "fcf": -147782000000.0,
+      "total_debt": 1025994981376,
+      "cash": 1287710048256,
+      "shares_outstanding": 2697032375,
+      "beta": 1.059,
+      "revenue_growth": 0.025,
+      "fcf_margin": -0.8784259694629075
+    },
+    "market_data": {
+      "ticker": "JPM",
+      "price": 300.26,
+      "market_cap": 809810984960,
+      "ev": 548095918080,
+      "total_debt": 1025994981376,
+      "cash": 1287710048256
+    },
+    "comp_metrics": {
+      "ticker": "JPM",
+      "price": 300.26,
+      "market_cap": 809810984960,
+      "ev": 548095918080,
+      "ebitda": null,
+      "revenue": 168235008000,
+      "ev_ebitda": null,
+      "pe_ratio": 14.857002,
+      "ps_ratio": 4.81357,
+      "peg_ratio": null,
+      "revenue_growth": 0.025
+    }
+  },
+  "GS": {
+    "financials": {
+      "ticker": "GS",
+      "revenue": 59396001792,
+      "ebit": null,
+      "ebitda": null,
+      "net_income": 16243999744,
+      "fcf": -15303000000.0,
+      "total_debt": 747582980096,
+      "cash": 996629020672,
+      "shares_outstanding": 299928511,
+      "beta": 1.336,
+      "revenue_growth": 0.152,
+      "fcf_margin": -0.25764360459126306
+    },
+    "market_data": {
+      "ticker": "GS",
+      "price": 862.58,
+      "market_cap": 261121163264,
+      "ev": 12075122688,
+      "total_debt": 747582980096,
+      "cash": 996629020672
+    },
+    "comp_metrics": {
+      "ticker": "GS",
+      "price": 862.58,
+      "market_cap": 261121163264,
+      "ev": 12075122688,
+      "ebitda": null,
+      "revenue": 59396001792,
+      "ev_ebitda": null,
+      "pe_ratio": 16.778448,
+      "ps_ratio": 4.39628,
+      "peg_ratio": null,
+      "revenue_growth": 0.152
+    }
+  },
+  "BAC": {
+    "financials": {
+      "ticker": "BAC",
+      "revenue": 107421999104,
+      "ebit": null,
+      "ebitda": null,
+      "net_income": 29055000576,
+      "fcf": -8805000000.0,
+      "total_debt": 767072010240,
+      "cash": 770163015680,
+      "shares_outstanding": 7212464345,
+      "beta": 1.263,
+      "revenue_growth": 0.072,
+      "fcf_margin": -0.08196645075908045
+    },
+    "market_data": {
+      "ticker": "BAC",
+      "price": 49.97,
+      "market_cap": 364905725952,
+      "ev": 361814720512,
+      "total_debt": 767072010240,
+      "cash": 770163015680
+    },
+    "comp_metrics": {
+      "ticker": "BAC",
+      "price": 49.97,
+      "market_cap": 364905725952,
+      "ev": 361814720512,
+      "ebitda": null,
+      "revenue": 107421999104,
+      "ev_ebitda": null,
+      "pe_ratio": 13.081152,
+      "ps_ratio": 3.39694,
+      "peg_ratio": null,
+      "revenue_growth": 0.072
+    }
+  },
+  "XOM": {
+    "financials": {
+      "ticker": "XOM",
+      "revenue": 323904995328,
+      "ebit": 41871000000.0,
+      "ebitda": 59385999360,
+      "net_income": 28843999232,
+      "fcf": 23612000000.0,
+      "total_debt": 50487001088,
+      "cash": 10680999936,
+      "shares_outstanding": 4166763453,
+      "beta": 0.348,
+      "revenue_growth": -0.013,
+      "fcf_margin": 0.07289791865077438
+    },
+    "market_data": {
+      "ticker": "XOM",
+      "price": 151.83,
+      "market_cap": 632639717376,
+      "ev": 672445718528,
+      "total_debt": 50487001088,
+      "cash": 10680999936
+    },
+    "comp_metrics": {
+      "ticker": "XOM",
+      "price": 151.83,
+      "market_cap": 632639717376,
+      "ev": 672445718528,
+      "ebitda": 59385999360,
+      "revenue": 323904995328,
+      "ev_ebitda": 11.445,
+      "pe_ratio": 23.039454,
+      "ps_ratio": 1.95316,
+      "peg_ratio": null,
+      "revenue_growth": -0.013
+    }
+  },
+  "CVX": {
+    "financials": {
+      "ticker": "CVX",
+      "revenue": 184654004224,
+      "ebit": 20960000000.0,
+      "ebitda": 37631000576,
+      "net_income": 12298999808,
+      "fcf": 16592000000.0,
+      "total_debt": 46742999040,
+      "cash": 6296999936,
+      "shares_outstanding": 1980000000,
+      "beta": 0.658,
+      "revenue_growth": -0.082,
+      "fcf_margin": 0.08985453670353438
+    },
+    "market_data": {
+      "ticker": "CVX",
+      "price": 188.77,
+      "market_cap": 377417990144,
+      "ev": 417863989248,
+      "total_debt": 46742999040,
+      "cash": 6296999936
+    },
+    "comp_metrics": {
+      "ticker": "CVX",
+      "price": 188.77,
+      "market_cap": 377417990144,
+      "ev": 417863989248,
+      "ebitda": 37631000576,
+      "revenue": 184654004224,
+      "ev_ebitda": 11.237,
+      "pe_ratio": 28.558245,
+      "ps_ratio": 2.04392,
+      "peg_ratio": null,
+      "revenue_growth": -0.082
+    }
+  },
+  "JNJ": {
+    "financials": {
+      "ticker": "JNJ",
+      "revenue": 94193000448,
+      "ebit": 33552000000.0,
+      "ebitda": 33835999232,
+      "net_income": 26804000768,
+      "fcf": 19313000000.0,
+      "total_debt": 49332998144,
+      "cash": 20102000640,
+      "shares_outstanding": 2409898936,
+      "beta": 0.326,
+      "revenue_growth": 0.091,
+      "fcf_margin": 0.20503646670287243
+    },
+    "market_data": {
+      "ticker": "JNJ",
+      "price": 246.75,
+      "market_cap": 594642599936,
+      "ev": 623873597440,
+      "total_debt": 49332998144,
+      "cash": 20102000640
+    },
+    "comp_metrics": {
+      "ticker": "JNJ",
+      "price": 246.75,
+      "market_cap": 594642599936,
+      "ev": 623873597440,
+      "ebitda": 33835999232,
+      "revenue": 94193000448,
+      "ev_ebitda": 18.438,
+      "pe_ratio": 22.513685,
+      "ps_ratio": 6.31302,
+      "peg_ratio": null,
+      "revenue_growth": 0.091
+    }
+  },
+  "PFE": {
+    "financials": {
+      "ticker": "PFE",
+      "revenue": 62578999296,
+      "ebit": 11114000000.0,
+      "ebitda": 25717999616,
+      "net_income": 7745999872,
+      "fcf": 9835000000.0,
+      "total_debt": 67647000576,
+      "cash": 13596000256,
+      "shares_outstanding": 5685707552,
+      "beta": 0.412,
+      "revenue_growth": -0.012,
+      "fcf_margin": 0.1571613498240878
+    },
+    "market_data": {
+      "ticker": "PFE",
+      "price": 26.58,
+      "market_cap": 151126114304,
+      "ev": 205177114624,
+      "total_debt": 67647000576,
+      "cash": 13596000256
+    },
+    "comp_metrics": {
+      "ticker": "PFE",
+      "price": 26.58,
+      "market_cap": 151126114304,
+      "ev": 205177114624,
+      "ebitda": 25717999616,
+      "revenue": 62578999296,
+      "ev_ebitda": 7.99,
+      "pe_ratio": 19.984962,
+      "ps_ratio": 2.41497,
+      "peg_ratio": null,
+      "revenue_growth": -0.012
+    }
+  },
+  "LLY": {
+    "financials": {
+      "ticker": "LLY",
+      "revenue": 65179000832,
+      "ebit": 29696000000.0,
+      "ebitda": 31693000704,
+      "net_income": 20640000000,
+      "fcf": 5964000000.0,
+      "total_debt": 43865001984,
+      "cash": 7267999744,
+      "shares_outstanding": 892992420,
+      "beta": 0.434,
+      "revenue_growth": 0.426,
+      "fcf_margin": 0.09150186292932463
+    },
+    "market_data": {
+      "ticker": "LLY",
+      "price": 1007.73,
+      "market_cap": 901937233920,
+      "ev": 938534236160,
+      "total_debt": 43865001984,
+      "cash": 7267999744
+    },
+    "comp_metrics": {
+      "ticker": "LLY",
+      "price": 1007.73,
+      "market_cap": 901937233920,
+      "ev": 938534236160,
+      "ebitda": 31693000704,
+      "revenue": 65179000832,
+      "ev_ebitda": 29.562,
+      "pe_ratio": 44.452137,
+      "ps_ratio": 13.83785,
+      "peg_ratio": null,
+      "revenue_growth": 0.426
+    }
+  },
+  "WMT": {
+    "financials": {
+      "ticker": "WMT",
+      "revenue": 713163014144,
+      "ebit": 29037000000.0,
+      "ebitda": 44178001920,
+      "net_income": 21892999168,
+      "fcf": 12660000000.0,
+      "total_debt": 67094999040,
+      "cash": 10727000064,
+      "shares_outstanding": 7970166964,
+      "beta": 0.657,
+      "revenue_growth": 0.056,
+      "fcf_margin": 0.017751902088186146
+    },
+    "market_data": {
+      "ticker": "WMT",
+      "price": 127.91,
+      "market_cap": 1019807399936,
+      "ev": 1076175398912,
+      "total_debt": 67094999040,
+      "cash": 10727000064
+    },
+    "comp_metrics": {
+      "ticker": "WMT",
+      "price": 127.91,
+      "market_cap": 1019807399936,
+      "ev": 1076175398912,
+      "ebitda": 44178001920,
+      "revenue": 713163014144,
+      "ev_ebitda": 24.503,
+      "pe_ratio": 46.51273,
+      "ps_ratio": 1.42998,
+      "peg_ratio": null,
+      "revenue_growth": 0.056
+    }
+  },
+  "COST": {
+    "financials": {
+      "ticker": "COST",
+      "revenue": 280390991872,
+      "ebit": 10972000000.0,
+      "ebitda": 13125000192,
+      "net_income": 8302000128,
+      "fcf": 7837000000.0,
+      "total_debt": 8172000256,
+      "cash": 17183000576,
+      "shares_outstanding": 443869411,
+      "beta": 0.993,
+      "revenue_growth": 0.083,
+      "fcf_margin": 0.027950255989599097
+    },
+    "market_data": {
+      "ticker": "COST",
+      "price": 1007.77,
+      "market_cap": 447407259648,
+      "ev": 438396259328,
+      "total_debt": 8172000256,
+      "cash": 17183000576
+    },
+    "comp_metrics": {
+      "ticker": "COST",
+      "price": 1007.77,
+      "market_cap": 447407259648,
+      "ev": 438396259328,
+      "ebitda": 13125000192,
+      "revenue": 280390991872,
+      "ev_ebitda": 33.395,
+      "pe_ratio": 53.776417,
+      "ps_ratio": 1.59565,
+      "peg_ratio": null,
+      "revenue_growth": 0.083
+    }
+  },
+  "HD": {
+    "financials": {
+      "ticker": "HD",
+      "revenue": 164683005952,
+      "ebit": NaN,
+      "ebitda": 25010999296,
+      "net_income": 14156000256,
+      "fcf": 16325000000.0,
+      "total_debt": 65350000640,
+      "cash": 1388999936,
+      "shares_outstanding": 995511485,
+      "beta": 1.044,
+      "revenue_growth": -0.038,
+      "fcf_margin": 0.09912983981333345
+    },
+    "market_data": {
+      "ticker": "HD",
+      "price": 366.92,
+      "market_cap": 365273088000,
+      "ev": 429234088704,
+      "total_debt": 65350000640,
+      "cash": 1388999936
+    },
+    "comp_metrics": {
+      "ticker": "HD",
+      "price": 366.92,
+      "market_cap": 365273088000,
+      "ev": 429234088704,
+      "ebitda": 25010999296,
+      "revenue": 164683005952,
+      "ev_ebitda": 17.125,
+      "pe_ratio": 26.041164,
+      "ps_ratio": 2.21804,
+      "peg_ratio": null,
+      "revenue_growth": -0.038
+    }
   }
 }

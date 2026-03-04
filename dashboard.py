@@ -1,5 +1,5 @@
 """
-dashboard.py — Streamlit interactive dashboard for the AI Sector Valuation Tool.
+dashboard.py — Streamlit interactive dashboard for the Equity Valuation Tool.
 
 Run with:
     streamlit run dashboard.py
@@ -18,7 +18,7 @@ import numpy as np
 
 # ── Page config — MUST be the first Streamlit call ───────────────────────────
 st.set_page_config(
-    page_title="AI Valuation · Bubble or Boom?",
+    page_title="Equity Valuation Tool · Bubble or Boom?",
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -26,7 +26,7 @@ st.set_page_config(
 
 # ── Engine imports ─────────────────────────────────────────────────────────────
 from config      import DEFAULT_PEER_GROUP
-from utils       import fetch_financials, build_wacc, get_market_data, format_large_number
+from utils       import fetch_financials, build_wacc, get_market_data, format_large_number, get_cached_tickers
 from dcf         import dcf_summary
 from comps       import comps_summary
 from sensitivity import build_sensitivity_matrix, build_scenarios
@@ -39,9 +39,13 @@ AMBER  = "#F39C12"
 BLUE   = "#2E86C1"
 PT     = "plotly_dark"      # Plotly template
 
-ALL_TICKERS = sorted(set(
-    DEFAULT_PEER_GROUP + ["TSLA", "AAPL", "INTC", "QCOM", "SNOW", "PLTR", "ARM"]
-))
+_SECTOR_SUGGESTIONS = {
+    "Tech":        "NVDA, MSFT, GOOGL, META, AMD, AMZN, CRM, AAPL, TSLA, INTC, QCOM, ARM",
+    "Finance":     "JPM, GS, BAC, WFC, C, MS, BLK",
+    "Energy":      "XOM, CVX, COP, SLB, EOG",
+    "Healthcare":  "JNJ, PFE, LLY, ABBV, MRK, UNH",
+    "Consumer":    "WMT, COST, HD, TGT, AMZN, NKE",
+}
 
 
 # ── Cached data fetchers ───────────────────────────────────────────────────────
@@ -130,7 +134,7 @@ def fig_ev_ebitda(comps_df, target_ticker, median):
             annotation_font_color=AMBER, annotation_font_size=11,
         )
     fig.update_layout(
-        template=PT, title="AI Sector — EV/EBITDA Multiples",
+        template=PT, title="EV/EBITDA — Comparable Analysis",
         yaxis_title="EV / EBITDA  (×)", showlegend=False,
         margin=dict(l=10, r=20, t=50, b=30), height=340,
     )
@@ -227,21 +231,36 @@ def fig_scenarios(scenarios, current_price):
 
 # ── Sidebar ────────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("## 📊 AI Valuation Tool")
+    st.markdown("## 📊 Equity Valuation Tool")
     st.markdown("*Bubble or Boom?*")
     st.divider()
 
     ticker_input = st.text_input(
         "Ticker Symbol", value="NVDA", max_chars=10,
-        help="Any US-listed equity. Optimised for AI / tech sector names.",
+        help="Any US-listed equity.",
     ).upper().strip()
 
-    peers_input = st.multiselect(
-        "Peer Group",
-        options=ALL_TICKERS,
-        default=[t for t in DEFAULT_PEER_GROUP if t != "NVDA"],
-        help="Tickers used for comparable company analysis.",
+    _default_peers = ", ".join([t for t in DEFAULT_PEER_GROUP if t != "NVDA"])
+    peers_raw = st.text_input(
+        "Peer Group  (comma-separated)",
+        value=_default_peers,
+        help="Enter any tickers separated by commas. e.g. JPM, GS, BAC or AAPL, MSFT, AMZN",
     )
+    peers_input = [p.strip().upper() for p in peers_raw.split(",") if p.strip()]
+
+    with st.expander("Suggestions by sector"):
+        for sector, tickers_str in _SECTOR_SUGGESTIONS.items():
+            if st.button(sector, key=f"sector_{sector}", use_container_width=True):
+                # Strip target from suggestions if it matches
+                filtered = ", ".join(
+                    t for t in tickers_str.split(", ") if t != ticker_input
+                )
+                st.session_state["_peer_suggestion"] = filtered
+                st.rerun()
+
+    # Apply suggestion from button click
+    if "_peer_suggestion" in st.session_state:
+        peers_input = [p.strip().upper() for p in st.session_state.pop("_peer_suggestion").split(",") if p.strip()]
 
     st.divider()
     st.markdown("**Override Assumptions**")
@@ -290,9 +309,11 @@ if run_btn:
 
         if not market_data.get("price"):
             status.update(label="Failed", state="error")
+            cached_list = ", ".join(get_cached_tickers()) or "NVDA, MSFT, GOOGL, META, AMD, AMZN, CRM"
             st.error(
-                f"No data available for **{ticker_input}** — not in cache and live fetch failed. "
-                f"Try one of the default tickers: NVDA, MSFT, GOOGL, META, AMD, AMZN, CRM."
+                f"**'{ticker_input}'** isn't in the pre-loaded cache and the live fetch failed. "
+                f"On the deployed version, only cached tickers are guaranteed to work. "
+                f"Try: {cached_list} — or run locally for live data on any ticker."
             )
             st.stop()
 
@@ -329,12 +350,12 @@ if run_btn:
 # ── Landing page ───────────────────────────────────────────────────────────────
 if "results" not in st.session_state:
     st.markdown("""
-    # 📊 AI Sector Valuation Tool
+    # 📊 Equity Valuation Tool
     ### *Bubble or Boom?*
 
     A professional equity analysis suite combining **DCF modelling**,
     **comparable company analysis**, and **sensitivity analysis**
-    for AI-sector stocks.
+    for any publicly traded stock.
 
     ---
     Enter a ticker in the sidebar and click **▶ Run Analysis** to begin.

@@ -4,7 +4,7 @@ All tunable parameters live here to make the model easy to adjust.
 """
 
 # ─── Peer Group ───────────────────────────────────────────────────────────────
-# Core AI-infrastructure and platform companies used as the default comparables.
+# Default comparable peer group — change freely or override via the dashboard.
 DEFAULT_PEER_GROUP = ["NVDA", "MSFT", "GOOGL", "META", "AMD", "AMZN", "CRM"]
 
 # ─── Discount Rate Assumptions ────────────────────────────────────────────────

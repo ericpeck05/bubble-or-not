@@ -254,3 +254,8 @@ def safe_divide(numerator, denominator, fallback=None):
 def get_ticker(symbol: str) -> yf.Ticker:
     """Plain yf.Ticker — kept for backward compatibility with comps.py."""
     return yf.Ticker(symbol)
+
+
+def get_cached_tickers() -> list:
+    """Return sorted list of tickers available in the local cache."""
+    return sorted(_CACHE.keys())

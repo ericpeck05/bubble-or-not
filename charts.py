@@ -233,7 +233,7 @@ def chart_comps_ev_ebitda(
         ax.set_xlabel("Company", fontsize=11, labelpad=8)
         ax.set_ylabel("EV / EBITDA  (×)", fontsize=11, labelpad=8)
         ax.set_title(
-            "AI Sector  —  EV/EBITDA Comparable Analysis",
+            "EV/EBITDA  —  Comparable Analysis",
             fontsize=14, fontweight="bold", pad=16, color=TITLE_COLOR,
         )
         ax.legend(fontsize=10, facecolor=BG_PANEL, edgecolor=SPINE_COLOR,
