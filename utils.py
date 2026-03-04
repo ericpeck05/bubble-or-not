@@ -1,9 +1,9 @@
 """
 utils.py — Data fetching, WACC construction, and shared helpers.
 
-Uses curl_cffi to impersonate a real Chrome browser, bypassing Yahoo
-Finance's bot-detection on cloud server IPs (Streamlit Cloud / AWS).
-Falls back to cached_data.json only if the live fetch fails.
+Primary source: yahooquery — hits different Yahoo Finance endpoints that
+are not blocked on cloud server IPs (Streamlit Cloud / AWS).
+Fallback: cached_data.json — used only when the live fetch fails.
 """
 
 import json
@@ -14,13 +14,6 @@ warnings.filterwarnings("ignore")
 
 import numpy as np
 import pandas as pd
-import yfinance as yf
-
-try:
-    from curl_cffi import requests as _curl_requests
-    _SESSION = _curl_requests.Session(impersonate="chrome")
-except Exception:
-    _SESSION = None
 
 from config import (
     RISK_FREE_RATE, EQUITY_RISK_PREMIUM,
@@ -41,16 +34,101 @@ def _cached(ticker: str, key: str):
     return _CACHE.get(ticker.upper(), {}).get(key, {})
 
 
+def _safe_num(val, fallback=None):
+    """Return val if it's a usable number, else fallback."""
+    try:
+        if val is None:
+            return fallback
+        f = float(val)
+        return fallback if (math.isnan(f) or math.isinf(f)) else f
+    except Exception:
+        return fallback
+
+
+def _yq_fetch(ticker: str):
+    """
+    Fetch all needed data from yahooquery in one call.
+    Returns (financial_data, price_data, summary_detail, key_stats) dicts,
+    all normalised so missing/error responses become empty dicts.
+    """
+    from yahooquery import Ticker
+    sym = ticker.upper()
+    yq  = Ticker(sym)
+
+    def _safe(d):
+        v = d.get(sym, {})
+        return v if isinstance(v, dict) else {}
+
+    return (
+        _safe(yq.financial_data),
+        _safe(yq.price),
+        _safe(yq.summary_detail),
+        _safe(yq.key_stats),
+        yq,          # keep the Ticker object for statement calls
+    )
+
+
+# ── yfinance-compatible wrapper used by comps.py ──────────────────────────────
+
+class _YQTicker:
+    """
+    Thin yahooquery wrapper with a .info property that looks like yfinance's
+    info dict.  comps.py calls get_ticker(t).info — this satisfies that.
+    """
+    def __init__(self, symbol: str):
+        self._sym   = symbol.upper()
+        self._cache = None
+
+    @property
+    def info(self) -> dict:
+        if self._cache is not None:
+            return self._cache
+        try:
+            fd, pr, sd, ks, _ = _yq_fetch(self._sym)
+            price = _safe_num(pr.get("regularMarketPrice"))
+            if not price:
+                self._cache = {}
+                return self._cache
+
+            market_cap = _safe_num(pr.get("marketCap"))
+            total_debt = _safe_num(fd.get("totalDebt"), 0)
+            cash       = _safe_num(fd.get("totalCash"),  0)
+            ev         = (market_cap + total_debt - cash) if market_cap else None
+
+            self._cache = {
+                "currentPrice":                   price,
+                "regularMarketPrice":             price,
+                "marketCap":                      market_cap,
+                "totalDebt":                      total_debt,
+                "totalCash":                      cash,
+                "enterpriseValue":                ev,
+                "ebitda":                         _safe_num(fd.get("ebitda")),
+                "totalRevenue":                   _safe_num(fd.get("totalRevenue")),
+                "revenueGrowth":                  _safe_num(fd.get("revenueGrowth")),
+                "netIncomeToCommon":              _safe_num(fd.get("netIncomeToCommon")),
+                "freeCashflow":                   _safe_num(fd.get("freeCashflow")),
+                "operatingCashflow":              _safe_num(fd.get("operatingCashflow")),
+                "beta":                           _safe_num(sd.get("beta")),
+                "sharesOutstanding":              _safe_num(ks.get("sharesOutstanding")),
+                "trailingPE":                     _safe_num(sd.get("trailingPE")),
+                "forwardPE":                      _safe_num(sd.get("forwardPE")),
+                "trailingEps":                    _safe_num(ks.get("trailingEps")),
+                "epsTrailingTwelveMonths":        _safe_num(ks.get("trailingEps")),
+                "priceToSalesTrailing12Months":   _safe_num(sd.get("priceToSalesTrailing12Months")),
+                "pegRatio":                       _safe_num(ks.get("pegRatio")),
+                "enterpriseToEbitda":             _safe_num(ks.get("enterpriseToEbitda")),
+            }
+        except Exception:
+            self._cache = {}
+        return self._cache
+
+
 # ─── Financial Data ───────────────────────────────────────────────────────────
 
 def fetch_financials(ticker: str) -> dict:
     """
-    Pull income-statement, balance-sheet, and cash-flow data via yfinance.
-    Falls back to cached_data.json when the live fetch is blocked.
-
-    Returns a dict with:
-        ticker, revenue, ebit, ebitda, net_income, fcf, total_debt, cash,
-        shares_outstanding, beta, revenue_growth, fcf_margin, _from_cache
+    Pull financials via yahooquery.
+    Falls back to cached_data.json if the live fetch fails.
     """
     result: dict = {
         "ticker":             ticker,
@@ -69,70 +147,61 @@ def fetch_financials(ticker: str) -> dict:
     }
 
     try:
-        stock = yf.Ticker(ticker, session=_SESSION)
-        info  = stock.info or {}
+        fd, pr, sd, ks, yq = _yq_fetch(ticker)
 
-        # Treat an empty or price-less info dict as a failed fetch
-        if not info.get("regularMarketPrice") and not info.get("currentPrice"):
-            raise ValueError("Empty info — likely blocked by Yahoo Finance")
+        price = _safe_num(pr.get("regularMarketPrice"))
+        if not price:
+            raise ValueError("No price from yahooquery — ticker may be invalid")
 
-        result["ebitda"]             = info.get("ebitda")
-        result["net_income"]         = info.get("netIncomeToCommon")
-        result["total_debt"]         = info.get("totalDebt",  0) or 0
-        result["cash"]               = info.get("totalCash",  0) or 0
-        result["shares_outstanding"] = info.get("sharesOutstanding")
-        result["beta"]               = info.get("beta")
-        result["revenue"]            = info.get("totalRevenue")
-        if info.get("revenueGrowth") is not None:
-            result["revenue_growth"] = info["revenueGrowth"]
+        result["ebitda"]             = _safe_num(fd.get("ebitda"))
+        result["net_income"]         = _safe_num(fd.get("netIncomeToCommon"))
+        result["total_debt"]         = _safe_num(fd.get("totalDebt"), 0)
+        result["cash"]               = _safe_num(fd.get("totalCash"),  0)
+        result["shares_outstanding"] = _safe_num(ks.get("sharesOutstanding"))
+        result["beta"]               = _safe_num(sd.get("beta"))
+        result["revenue"]            = _safe_num(fd.get("totalRevenue"))
+        result["revenue_growth"]     = _safe_num(fd.get("revenueGrowth"))
+        result["fcf"]                = _safe_num(fd.get("freeCashflow"))
 
-        # Income statement
+        # EBIT + revenue growth from income statement (more precise)
         try:
-            inc = stock.income_stmt
-            if inc is not None and not inc.empty:
-                col = inc.columns[0]
-                for label in ("EBIT", "Operating Income", "Ebit"):
-                    if label in inc.index:
-                        result["ebit"] = float(inc.loc[label, col])
-                        break
-                if result["revenue"] is None:
-                    for label in ("Total Revenue", "Revenue"):
-                        if label in inc.index:
-                            result["revenue"] = float(inc.loc[label, col])
+            sym = ticker.upper()
+            is_df = yq.income_statement(frequency="annual", trailing=True)
+            if is_df is not None and not isinstance(is_df, str) and not is_df.empty:
+                if "asOfDate" in is_df.columns:
+                    is_df = is_df.sort_values("asOfDate", ascending=False)
+                row = is_df.iloc[0]
+                for col in ("EBIT", "OperatingIncome"):
+                    if col in is_df.columns:
+                        v = _safe_num(row.get(col))
+                        if v is not None:
+                            result["ebit"] = v
                             break
-                if result["revenue_growth"] is None and inc.shape[1] >= 2:
-                    col_prev = inc.columns[1]
-                    for label in ("Total Revenue", "Revenue"):
-                        if label in inc.index:
-                            rv, rp = inc.loc[label, col], inc.loc[label, col_prev]
-                            if rp and rp != 0:
-                                result["revenue_growth"] = (rv - rp) / abs(rp)
-                            break
+                if result["revenue"] is None and "TotalRevenue" in is_df.columns:
+                    result["revenue"] = _safe_num(row.get("TotalRevenue"))
+                if result["revenue_growth"] is None and "TotalRevenue" in is_df.columns and len(is_df) >= 2:
+                    rv = _safe_num(is_df.iloc[0]["TotalRevenue"])
+                    rp = _safe_num(is_df.iloc[1]["TotalRevenue"])
+                    if rv and rp and rp != 0:
+                        result["revenue_growth"] = (rv - rp) / abs(rp)
         except Exception:
             pass
 
-        # Cash-flow statement
-        try:
-            cf = stock.cashflow
-            if cf is not None and not cf.empty:
-                col = cf.columns[0]
-                op_cf, capex = None, 0.0
-                for label in ("Operating Cash Flow", "Cash Flow From Operations",
-                              "Total Cash From Operating Activities"):
-                    if label in cf.index:
-                        op_cf = float(cf.loc[label, col])
-                        break
-                for label in ("Capital Expenditure", "Capital Expenditures",
-                              "Purchase Of PPE"):
-                    if label in cf.index:
-                        capex = float(cf.loc[label, col])
-                        break
-                if op_cf is not None:
-                    result["fcf"] = op_cf - abs(capex)
-        except Exception:
-            pass
+        # FCF from cashflow statement if freeCashflow missing
+        if result["fcf"] is None:
+            try:
+                cf_df = yq.cash_flow(frequency="annual", trailing=True)
+                if cf_df is not None and not isinstance(cf_df, str) and not cf_df.empty:
+                    if "asOfDate" in cf_df.columns:
+                        cf_df = cf_df.sort_values("asOfDate", ascending=False)
+                    row = cf_df.iloc[0]
+                    op_cf = _safe_num(row.get("OperatingCashFlow"))
+                    capex = _safe_num(row.get("CapitalExpenditure"), 0)
+                    if op_cf is not None:
+                        result["fcf"] = op_cf - abs(capex)
+            except Exception:
+                pass
 
-        # FCF margin
         rev, fcf = result["revenue"], result["fcf"]
         if rev and rev > 0 and fcf is not None:
             result["fcf_margin"] = fcf / rev
@@ -140,9 +209,8 @@ def fetch_financials(ticker: str) -> dict:
         return result
 
     except Exception as exc:
-        print(f"  [Info] Live fetch failed for {ticker} ({exc}). Using cache.")
+        print(f"  [Info] yahooquery fetch failed for {ticker} ({exc}). Using cache.")
 
-    # ── Fallback to cache ─────────────────────────────────────────
     cached = _cached(ticker, "financials")
     if cached:
         cached["_from_cache"] = True
@@ -155,9 +223,7 @@ def fetch_financials(ticker: str) -> dict:
 # ─── WACC Builder ─────────────────────────────────────────────────────────────
 
 def build_wacc(ticker: str, manual_wacc: float = None) -> dict:
-    """
-    Compute WACC via CAPM. Uses cached financials if live fetch is unavailable.
-    """
+    """Compute WACC via CAPM."""
     if manual_wacc is not None:
         return {
             "wacc": manual_wacc, "cost_of_equity": None,
@@ -165,7 +231,6 @@ def build_wacc(ticker: str, manual_wacc: float = None) -> dict:
             "equity_weight": None, "beta": None, "manual_override": True,
         }
 
-    # Pull beta + capital structure from financials (already cache-aware)
     fin = fetch_financials(ticker)
     md  = get_market_data(ticker)
 
@@ -174,7 +239,7 @@ def build_wacc(ticker: str, manual_wacc: float = None) -> dict:
     market_cap = md.get("market_cap") or 0
 
     cost_of_equity = RISK_FREE_RATE + beta * EQUITY_RISK_PREMIUM
-    cost_of_debt   = DEFAULT_DEBT_COST   # simplified; interest-expense parse is optional
+    cost_of_debt   = DEFAULT_DEBT_COST
 
     total_capital = market_cap + total_debt
     if total_capital <= 0:
@@ -199,24 +264,21 @@ def build_wacc(ticker: str, manual_wacc: float = None) -> dict:
 # ─── Market Data ──────────────────────────────────────────────────────────────
 
 def get_market_data(ticker: str) -> dict:
-    """
-    Fetch current price, market cap, and EV.
-    Falls back to cached_data.json when blocked.
-    """
+    """Fetch current price, market cap, and EV via yahooquery."""
     blank = {
         "ticker": ticker, "price": None, "market_cap": None,
         "ev": None, "total_debt": 0, "cash": 0, "_from_cache": False,
     }
     try:
-        info       = yf.Ticker(ticker, session=_SESSION).info or {}
-        price      = info.get("currentPrice") or info.get("regularMarketPrice")
-        market_cap = info.get("marketCap")
+        fd, pr, sd, ks, _ = _yq_fetch(ticker)
 
+        price = _safe_num(pr.get("regularMarketPrice"))
         if not price:
-            raise ValueError("No price returned — likely blocked")
+            raise ValueError("No price returned")
 
-        total_debt = info.get("totalDebt", 0) or 0
-        cash       = info.get("totalCash",  0) or 0
+        market_cap = _safe_num(pr.get("marketCap"))
+        total_debt = _safe_num(fd.get("totalDebt"), 0)
+        cash       = _safe_num(fd.get("totalCash"),  0)
         ev         = (market_cap + total_debt - cash) if market_cap else None
 
         return {
@@ -225,7 +287,7 @@ def get_market_data(ticker: str) -> dict:
         }
 
     except Exception as exc:
-        print(f"  [Info] Live market data failed for {ticker} ({exc}). Using cache.")
+        print(f"  [Info] yahooquery market data failed for {ticker} ({exc}). Using cache.")
 
     cached = _cached(ticker, "market_data")
     if cached:
@@ -256,9 +318,9 @@ def safe_divide(numerator, denominator, fallback=None):
         return fallback
 
 
-def get_ticker(symbol: str) -> yf.Ticker:
-    """Plain yf.Ticker — kept for backward compatibility with comps.py."""
-    return yf.Ticker(symbol, session=_SESSION)
+def get_ticker(symbol: str) -> _YQTicker:
+    """Returns a yahooquery-backed ticker with a yfinance-compatible .info property."""
+    return _YQTicker(symbol)
 
 
 def get_cached_tickers() -> list:
