@@ -104,7 +104,9 @@ def print_comps(comps: dict, ticker: str):
     # ── Multiples table ───────────────────────────────────────
     display = df[["ev_ebitda", "pe_ratio", "ps_ratio", "peg_ratio"]].copy()
     display.columns = ["EV/EBITDA", "P/E", "P/S", "PEG"]
-    display = display.applymap(
+    # DataFrame.applymap was removed in pandas 3; DataFrame.map replaces it (pandas >= 2.1)
+    _elementwise = getattr(display, "map", None) or display.applymap
+    display = _elementwise(
         lambda x: f"{x:.1f}×" if pd.notna(x) and isinstance(x, (int, float)) and x > 0 else "—"
     )
     print()
